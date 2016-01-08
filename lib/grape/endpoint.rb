@@ -248,7 +248,11 @@ module Grape
 
         route_setting(:saved_validations).each do |validator|
           begin
-            validator.validate!(params)
+            if validator.method(:validate!).arity == 1
+              validator.validate!(params)
+            else
+              validator.validate!(params, @request)
+            end
           rescue Grape::Exceptions::Validation => e
             validation_errors << e
           end
