@@ -119,7 +119,7 @@ describe Grape::Validations::CoerceValidator do
 
         get '/int', int: '45'
         expect(last_response.status).to eq(200)
-        expect(last_response.body).to eq('Fixnum')
+        expect(last_response.body).to eq('Integer')
       end
 
       context 'Array' do
@@ -133,7 +133,7 @@ describe Grape::Validations::CoerceValidator do
 
           get '/array', arry: %w(1 2 3)
           expect(last_response.status).to eq(200)
-          expect(last_response.body).to eq('Fixnum')
+          expect(last_response.body).to eq('Integer')
         end
 
         it 'Array of Bools' do
@@ -182,7 +182,7 @@ describe Grape::Validations::CoerceValidator do
 
           get '/set', set: Set.new([1, 2, 3, 4]).to_a
           expect(last_response.status).to eq(200)
-          expect(last_response.body).to eq('Fixnum')
+          expect(last_response.body).to eq('Integer')
         end
 
         it 'Set of Bools' do
@@ -270,7 +270,7 @@ describe Grape::Validations::CoerceValidator do
 
         get '/int', integers: { int: '45' }
         expect(last_response.status).to eq(200)
-        expect(last_response.body).to eq('Fixnum')
+        expect(last_response.body).to eq('Integer')
       end
     end
 
@@ -383,11 +383,11 @@ describe Grape::Validations::CoerceValidator do
 
         get '/', splines: '{"x":"1","y":"woof"}'
         expect(last_response.status).to eq(200)
-        expect(last_response.body).to eq('Fixnum.String')
+        expect(last_response.body).to eq('Integer.String')
 
         get '/', splines: '[{"x":1,"y":2},{"x":1,"y":"quack"}]'
         expect(last_response.status).to eq(200)
-        expect(last_response.body).to eq('Fixnum.Fixnum')
+        expect(last_response.body).to eq('Integer.Integer')
 
         get '/', splines: '{"x":"4","y":"woof"}'
         expect(last_response.status).to eq(400)
@@ -434,7 +434,7 @@ describe Grape::Validations::CoerceValidator do
 
         get '/', a: '5'
         expect(last_response.status).to eq(200)
-        expect(last_response.body).to eq('Fixnum')
+        expect(last_response.body).to eq('Integer')
 
         get '/', a: 'anything else'
         expect(last_response.status).to eq(200)
