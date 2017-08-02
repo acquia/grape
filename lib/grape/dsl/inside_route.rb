@@ -123,7 +123,7 @@ module Grape
           else
             fail ArgumentError, "Status code :#{status} is invalid."
           end
-        when Fixnum
+        when Integer
           @status = status
         when nil
           return @status if @status
@@ -134,7 +134,7 @@ module Grape
             200
           end
         else
-          fail ArgumentError, 'Status code must be Fixnum or Symbol.'
+          fail ArgumentError, 'Status code must be Integer or Symbol.'
         end
       end
 
